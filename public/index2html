@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome The New World</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            background-image: url('https://gifdb.com/images/high/gfycat-network-background-7ceo8pg1xxgcqj90.webp');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #login-container, #register-container {
+            border: 1px solid #333;
+            padding: 20px;
+            margin-bottom: 15px;
+            background-color: #212121;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            width: 555px;
+            margin-block: 120px;
+        }
+
+        #chat-container {
+            width: 760px;
+            border: 1px solid #333;
+            padding: 15px;
+            background-color: #000000de;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            display: none; /* Inicialmente oculto */
+            flex-direction: column;
+        }
+
+        #room-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #room-controls input[type="text"] {
+            padding: 8px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #333;
+            color: #e0e0e0;
+        }
+
+        #room-controls button {
+            padding: 8px 15px;
+            border: none;
+            background-color: #4caf50; /* Cor verde para ações de sala */
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #room-controls button:hover {
+            background-color: #45a049;
+        }
+
+        #current-room {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+
+        h2 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+        h3 {
+             color: #e0e0e0;
+             margin-bottom: 15px;
+        }
+
+
+        input[type="text"], input[type="password"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #333;
+            color: #e0e0e0;
+            width: 90%;
+        }
+
+        button {
+            padding: 8px 15px;
+            border: none;
+            background-color: #03a9f4;
+            color: #212121;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 80%;
+            margin-top: 21px;
+        }
+
+        button:hover {
+            background-color: #0288d1;
+        }
+
+        #login-error, #register-error {
+            color: #f44336;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #messages {
+            height: 300px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+
+        .message {
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f900;
+            color: #ffffff;
+            word-break: break-word;
+        }
+
+        .user {
+            font-weight: bold;
+            margin-right: 5px;
+            color: #bbdefb;
+        }
+
+        .audio-message {
+            background-color: #64b5f6;
+            color: #212121;
+        }
+
+        #input-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #input-container input[type="text"] {
+            text-align: center;
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #333;
+            color: #e0e0e0;
+        }
+
+        #audio-controls {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        #audio-preview {
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+        }
+        .proposito-link { /* Estilo para o link "Nosso Propósito" */
+            color: #03a9f4; /* Cor azul claro */
+            text-decoration: none;
+            margin-bottom: 10px; /* Espaço abaixo do link */
+            font-size: 0.9em;
+        }
+        .proposito-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8047537722016072" crossorigin="anonymous"></script>
+    <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-8047537722016072">
+    </amp-auto-ads>
+
+    <div id="login-container">
+        <h2>.°. Bem Vindo ao Inicio .°.</h2>
+        <h3> .º. - Junte-se a Nos - .º. </h3>
+        <input type="text" id="login-username" placeholder="Usuário"><br><br>
+        <input type="password" id="login-password" placeholder="Senha"><br><br>
+        <button onclick="login()">Entrar</button>
+        <button onclick="showRegister()">Cadastrar</button>
+        <p id="login-error"></p>
+        <p><a href="/proposito.html" class="proposito-link">Nosso Propósito</a></p>
+    </div>
+
+    <div id="register-container" style="display: none;">
+        <h2>Cadastro</h2>
+        <input type="text" id="register-username" placeholder="Novo Usuário"><br><br>
+        <input type="password" id="register-password" placeholder="Nova Senha"><br><br>
+        <button onclick="register()">Cadastrar</button>
+        <button onclick="showLogin()">Voltar para Login</button>
+        <p id="register-error"></p>
+    </div>
+
+    <div id="chat-container">
+        <h2> - Welcome to Anonymity - </h2>
+        <div id="room-controls">
+            <input type="text" id="create-room-name" placeholder="Nome da nova sala">
+            <button onclick="createPrivateRoom()">Criar Sala</button>
+            <input type="text" id="join-room-name" placeholder="Entrar na sala">
+            <button onclick="joinPrivateRoom()">Entrar</button>
+            <p id="current-room">Sala atual: Público</p>
+        </div>
+        <div id="messages"></div>
+        <div id="input-container">
+            <input type="text" id="message-input" placeholder="Digite sua mensagem">
+            <button onclick="sendMessage()">Enviar Texto</button>
+        </div>
+        <div id="audio-controls">
+            <button id="start-record-btn" onclick="startRecording()">Gravar Áudio</button>
+            <button id="stop-record-btn" onclick="stopRecording()" disabled>Parar Áudio</button>
+            <audio id="audio-preview" controls style="display: none;"></audio>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
