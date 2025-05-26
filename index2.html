@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome The New World</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            background-image: url('https://gifdb.com/images/high/gfycat-network-background-7ceo8pg1xxgcqj90.webp');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #login-container, #register-container {
+            border: 1px solid #333;
+            padding: 20px;
+            margin-bottom: 15px;
+            background-color: #212121;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            width: 555px;
+            margin-block: 120px;
+        }
+
+        /* Contêiner principal do layout do chat (Flexbox) */
+        #main-chat-layout {
+            display: flex;flex-direction: row; /* Habilita Flexbox para colunas */
+			flex-direction: row-reverse;
+			/* gap: 20px; <--- REMOVIDO: para que as colunas fiquem coladas */
+            width: 90%; /* Largura total do layout */
+            max-width: 1200px; /* Limite máximo para não ficar muito largo */
+            margin-top: 20px; /* Espaço do topo */
+            align-items: flex-start; /* Alinha o topo dos itens flex */
+            height: calc(100vh - 40px); /* Ocupa a altura restante da viewport */
+            box-sizing: border-box; /* Inclui padding e border na altura */
+            flex-direction: row-reverse; /* Move a sidebar para a esquerda */
+            /* Adicionado para um fundo contínuo e bordas unidas */
+            background-color: #000000de; /* Fundo que une as duas colunas */
+            border-radius: 8px; /* Borda única para todo o bloco */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            border: 1px solid #333; /* Borda única */
+            overflow: hidden; /* Garante que o border-radius seja aplicado corretamente */
+        }
+
+        #chat-main-content {
+            flex: 2; /* Ocupa 2 partes do espaço flexível (mais largo) */
+            /* border: 1px solid #333; <--- REMOVIDO: agora a borda está no pai */
+            padding: 15px;
+            background-color: transparent; /* <--- ALTERADO: transparente para ver o fundo do pai */
+            /* border-radius: 8px; <--- REMOVIDO: agora a borda está no pai */
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); <--- REMOVIDO: agora a sombra está no pai */
+            text-align: center;
+            display: flex; /* Flex para o conteúdo interno (coluna) */
+            flex-direction: column;
+            min-height: 500px; /* Altura mínima para o conteúdo principal */
+            height: 100%; /* Ocupa toda a altura do pai */
+        }
+
+        #active-rooms-sidebar {
+            flex: 1; /* Ocupa 1 parte do espaço flexível (mais estreito) */
+            /* border: 1px solid #333; <--- REMOVIDO: agora a borda está no pai */
+            padding: 15px;
+            background-color: #1a1a1a52; /* Fundo mais escuro */
+            /* border-radius: 8px; <--- REMOVIDO: agora a borda está no pai */
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); <--- REMOVIDO: agora a sombra está no pai */
+            text-align: center;
+            max-height: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ocupa toda a altura do pai */
+            border-right: 1px solid #333; /* Adiciona uma borda vertical entre as colunas */
+        }
+
+        /* Estilos existentes para controles de sala */
+        #room-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: nowrap;
+        }
+
+        #room-controls input[type="text"] {
+            padding: 8px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #333;
+            color: #e0e0e0;
+        }
+
+        #room-controls button {
+            padding: 8px 15px;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #room-controls button:hover {
+            background-color: #45a049;
+        }
+
+        #current-room {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+
+        /* Estilos para o título da lista de salas */
+        #active-rooms-sidebar h4 {
+            color: #03a9f4;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        #active-rooms-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Lista os itens em coluna */
+            gap: 8px;
+            align-items: center; /* Centraliza os itens na lista */
+        }
+
+        .room-item {
+            background-color: #333;
+            color: #e0e0e0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            width: 80%; /* Ocupa a maior parte da largura da coluna */
+            text-align: center;
+            word-break: break-word; /* Evita que nomes longos quebrem o layout */
+        }
+
+        .room-item:hover {
+            background-color: #555;
+            text-decoration: underline;
+        }
+
+        h2 {
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+        h3 {
+             color: #e0e0e0;
+             margin-bottom: 15px;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #555;
+            border-radius: 44px; /* <--- ALTERADO: Para deixar a borda dos inputs arredondadas */
+            background-color: #333;
+            color: #e0e0e0;
+            width: 90%;
+        }
+
+        button {
+            padding: 8px 15px;
+            border: none;
+            background-color: #03a9f4;
+            color: #212121;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 80%;
+            margin-top: 21px;
+        }
+
+        button:hover {
+            background-color: #0288d1;
+        }
+
+        #login-error, #register-error {
+            color: #f44336;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        #messages {
+            flex-grow: 1; /* Permite que ocupe o espaço disponível */
+            height: 300px; /* Altura inicial */
+            overflow-y: scroll;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+
+        .message {
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f900;
+            color: #ffffff;
+            word-break: break-word;
+        }
+
+        .user {
+            font-weight: bold;
+            margin-right: 5px;
+            color: #bbdefb;
+        }
+
+        .audio-message {
+            background-color: #64b5f6;
+            color: #212121;
+        }
+
+        #input-container {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #input-container input[type="text"] {
+            text-align: center;
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #333;
+            color: #e0e0e0;
+        }
+
+        #audio-controls {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        #audio-preview {
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+        }
+        .proposito-link {
+            color: #03a9f4;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        .proposito-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Media queries para responsividade em telas menores */
+        @media (max-width: 768px) {
+            #main-chat-layout {
+                flex-direction: column; /* Empilha as colunas verticalmente */
+                width: 95%;
+                height: auto;
+                /* Remove estilos de borda e sombra dos filhos para o pai */
+                border: none;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            #chat-main-content, #active-rooms-sidebar {
+                width: 100%;
+                flex: none;
+                max-height: none;
+                /* Adiciona borda e sombra de volta individualmente para responsividade */
+                border: 1px solid #333;
+                background-color: #000000de; /* Fundo original */
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+                margin-bottom: 20px; /* Espaço entre os blocos empilhados */
+            }
+            #active-rooms-sidebar {
+                background-color: #1a1a1a; /* Fundo específico da sidebar */
+                border-right: none; /* Remove a borda vertical */
+            }
+            #active-rooms-list {
+                flex-direction: row; /* Volta a listar horizontalmente */
+                flex-wrap: wrap; /* Quebra em múltiplas linhas */
+                justify-content: center;
+            }
+            .room-item {
+                width: auto; /* Largura automática para se adaptar ao conteúdo */
+                flex-grow: 1; /* Permite que o item cresça para preencher espaço */
+            }
+        }
+    </style>
+</head>
+<body>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8047537722016072" crossorigin="anonymous"></script>
+    <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-8047537722016072">
+    </amp-auto-ads>
+
+    <div id="login-container">
+        <h2>.°. Bem Vindo ao Inicio .°.</h2>
+        <h3> .º. - Junte-se a Nos - .º. </h3>
+        <input type="text" id="login-username" placeholder="Usuário"><br><br>
+        <input type="password" id="login-password" placeholder="Senha"><br><br>
+        <button onclick="login()">Entrar</button>
+        <button onclick="showRegister()">Cadastrar</button>
+        <p id="login-error"></p>
+        <p><a href="/proposito.html" class="proposito-link">Nosso Propósito</a></p>
+    </div>
+
+    <div id="register-container" style="display: none;">
+        <h2>Cadastro</h2>
+        <input type="text" id="register-username" placeholder="Novo Usuário"><br><br>
+        <input type="password" id="register-password" placeholder="Nova Senha"><br><br>
+        <button onclick="register()">Cadastrar</button>
+        <button onclick="showLogin()">Voltar para Login</button>
+        <p id="register-error"></p>
+    </div>
+
+    <div id="main-chat-layout" style="display: none;">
+        <div id="active-rooms-sidebar">
+            <h4>Salas Ativas</h4>
+            <ul id="active-rooms-list">
+                </ul>
+        </div>
+
+        <div id="chat-main-content">
+            <h2> - Welcome to Anonymity - </h2>
+            <div id="room-controls">
+                <input type="text" id="create-room-name" placeholder="Nome da nova sala">
+                <button onclick="createPrivateRoom()">Criar Sala</button>
+                <input type="text" id="join-room-name" placeholder="Entrar na sala">
+                <button onclick="joinPrivateRoom()">Entrar</button>
+                <p id="current-room">Sala atual: Público</p>
+            </div>
+            <div id="messages"></div>
+            <div id="input-container">
+                <input type="text" id="message-input" placeholder="Digite sua mensagem">
+                <button onclick="sendMessage()">Enviar Texto</button>
+            </div>
+            <div id="audio-controls">
+                <button id="start-record-btn" onclick="startRecording()">Gravar Áudio</button>
+                <button id="stop-record-btn" onclick="stopRecording()" disabled>Parar Áudio</button>
+                <audio id="audio-preview" controls style="display: none;"></audio>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
