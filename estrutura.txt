@@ -1,0 +1,9 @@
+hat-anonimo/
+├── .env                 # Variáveis de ambiente (sua URI do MongoDB)
+├── server.js            # Lógica do backend (Express, Socket.IO, MongoDB)
+├── models/
+│   └── User.js          # Definição do modelo de usuário para o MongoDB
+└── public/
+    ├── index2.html      # Página principal do chat (login/registro/chat)
+    ├── proposito.html   # Página com o propósito do chat
+    └── script.js        # Lógica JavaScript do frontend
