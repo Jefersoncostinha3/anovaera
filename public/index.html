@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem-vindo ao Anonymity Chat</title>
-    <style>
+    <link rel="icon" type="image/png" href="/seu_favicon.png"> <style>
         body {
             background-color: black;
             color: white;
@@ -37,20 +37,33 @@
             margin-bottom: 30px;
             line-height: 1.8;
         }
-        .purpose-button {
+        .button { /* Classe genérica para botões */
             display: inline-block;
             padding: 15px 30px;
-            background-color: #03a9f4;
-            color: black;
             text-decoration: none;
             border-radius: 8px;
             font-size: 1.1em;
             font-weight: bold;
             transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 10px; /* Margem entre os botões */
         }
-        .purpose-button:hover {
+        .button.purpose { /* Estilo específico para o botão Propósito */
+            background-color: #03a9f4;
+            color: black;
+        }
+        .button.purpose:hover {
             background-color: #0288d1;
             transform: scale(1.05);
+        }
+        .button.vip { /* Estilo específico para o botão VIP */
+            background-color: #00ff00; /* Verde neon */
+            color: black;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Brilho verde */
+        }
+        .button.vip:hover {
+            background-color: #00cc00;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
         }
     </style>
 </head>
@@ -58,7 +71,8 @@
     <div class="main-content">
         <h1>Bem-vindo ao Anonymity Chat</h1>
         <p>Um espaço seguro para conversas anônimas e liberdade de expressão.</p>
-        <a href="avisos.html" class="purpose-button">.°. - Junte-se a Nós - .°.</a>
+        <a href="proposito.html" class="button purpose">Conheça Nosso Propósito</a>
+        <a href="vip_benefits.html" class="button vip">Torne-se VIP</a>
     </div>
 </body>
 </html>
