@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome The New World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             background-color: black;
@@ -32,13 +33,18 @@
             text-align: center;
             width: 555px;
             margin-block: 120px;
+            /* Adicionado para organizar os elementos internos em coluna */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Contêiner principal do layout do chat (Flexbox) */
         #main-chat-layout {
-            display: flex;flex-direction: row; /* Habilita Flexbox para colunas */
-			flex-direction: row-reverse;
-			/* gap: 20px; <--- REMOVIDO: para que as colunas fiquem coladas */
+            display: flex;
+            flex-direction: row; /* Habilita Flexbox para colunas */
+            flex-direction: row-reverse;
+            /* gap: 20px; <--- REMOVIDO: para que as colunas fiquem coladas */
             width: 90%; /* Largura total do layout */
             max-width: 1200px; /* Limite máximo para não ficar muito largo */
             margin-top: 20px; /* Espaço do topo */
@@ -160,9 +166,10 @@
             color: #e0e0e0;
             margin-bottom: 15px;
         }
+
         h3 {
-             color: #e0e0e0;
-             margin-bottom: 15px;
+            color: #e0e0e0;
+            margin-bottom: 15px;
         }
 
         input[type="text"], input[type="password"] {
@@ -175,6 +182,7 @@
             width: 90%;
         }
 
+        /* Estilo para botões gerais, usado nos botões de login/cadastro */
         button {
             padding: 8px 15px;
             border: none;
@@ -183,7 +191,7 @@
             border-radius: 4px;
             cursor: pointer;
             width: 80%;
-            margin-top: 21px;
+            margin-top: 21px; /* Ajuste a margem superior conforme necessário */
         }
 
         button:hover {
@@ -257,18 +265,192 @@
             display: block;
             width: 100%;
         }
+
         .proposito-link {
             color: #03a9f4;
             text-decoration: none;
             margin-bottom: 10px;
             font-size: 0.9em;
         }
+
         .proposito-link:hover {
             text-decoration: underline;
         }
 
+        /* --- Estilos para o Botão de Doação Principal --- */
+        .donate-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ffc107; /* Amarelo vibrante */
+            color: #212121; /* Texto escuro para contraste */
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 80%; /* Alinha com os outros botões de login/cadastro */
+            margin-top: 20px; /* Espaço acima do botão */
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .donate-button:hover {
+            background-color: #e0a800;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.8);
+        }
+
+        .donate-button i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        /* --- Estilos do Modal de Doação (Adaptados ao Tema Neon Escuro) --- */
+        .modal {
+            display: none; /* Escondido por padrão */
+            position: fixed; /* Fica no topo da tela */
+            z-index: 100; /* Acima de tudo */
+            left: 0;
+            top: 0;
+            width: 100%; /* Largura total */
+            height: 100%; /* Altura total */
+            overflow: auto; /* Habilita rolagem se o conteúdo for muito grande */
+            background-color: rgba(0, 0, 0, 0.9); /* Fundo escuro mais opaco */
+            justify-content: center; /* Centraliza horizontalmente o modal-content */
+            align-items: center; /* Centraliza verticalmente o modal-content */
+            padding: 20px; /* Adiciona um padding para não colar nas bordas em mobile */
+            box-sizing: border-box; /* Garante que o padding não aumente o tamanho */
+        }
+
+        .modal-content {
+            background-color: #1a1a1a; /* Fundo escuro para o modal */
+            color: white; /* Texto claro no modal */
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%; /* Largura do modal */
+            max-width: 600px; /* Largura máxima */
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.7); /* Brilho verde neon */
+            position: relative;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 0, 0.5); /* Borda sutil */
+        }
+
+        .close-button {
+            color: #00ff00; /* Verde neon para o X */
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #00cc00; /* Verde mais escuro no hover */
+            text-decoration: none;
+        }
+
+        .modal-content h2 {
+            color: #00ff00; /* Verde neon para o título do modal */
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+        }
+
+        .modal-content p {
+            font-size: 1em;
+            color: #ccc;
+        }
+
+        .crypto-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            margin-bottom: 30px;
+        }
+
+        .crypto-btn {
+            background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente para o botão de cripto */
+            border: 1px solid #00ff00; /* Borda verde neon */
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: white; /* Texto branco */
+            flex: 1 1 calc(33% - 20px); /* 3 colunas em desktop, responsivo */
+            max-width: 180px; /* Largura máxima para cada botão de cripto */
+            transition: transform 0.2s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.95em;
+            box-shadow: 0 0 8px rgba(0, 255, 0, 0.3); /* Brilho verde sutil */
+        }
+
+        .crypto-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.6); /* Brilho mais intenso */
+            background-color: rgba(0, 255, 0, 0.1); /* Fundo mais claro no hover */
+            border-color: #00ff00;
+        }
+
+        .crypto-btn i {
+            font-size: 2.5em; /* Tamanho do ícone da cripto */
+            margin-bottom: 10px;
+            color: #00ff00; /* Verde neon para os ícones */
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        .crypto-btn .name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #00ff00; /* Verde neon para o nome da cripto */
+        }
+
+        .crypto-btn .address {
+            font-size: 0.8em;
+            word-break: break-all; /* Quebra a linha de endereço longo */
+            color: #ccc; /* Cor mais clara para o endereço */
+            margin-bottom: 5px;
+        }
+
+        .crypto-btn .wallet-link {
+            font-size: 0.8em;
+            color: #ffc107; /* Amarelo para o link da carteira */
+            text-decoration: none;
+            margin-top: 5px;
+        }
+
+        .crypto-btn .wallet-link:hover {
+            text-decoration: underline;
+            color: #e0a800;
+        }
+
+        /* Cores específicas para ícones de cripto (adaptadas ao seu tema) */
+        .crypto-btn.btc i { color: #f7931a; } /* Mantém a cor original do BTC */
+        .crypto-btn.bnb i { color: #f0b90b; } /* Mantém a cor original do BNB */
+        .crypto-btn.usdt i { color: #26a17b; } /* Mantém a cor original do USDT */
+        .crypto-btn.eth i { color: #627eea; } /* Mantém a cor original do ETH */
+        .crypto-btn.chz i { color: #ed1c24; } /* Mantém a cor original do Chiliz */
+
+
         /* Media queries para responsividade em telas menores */
         @media (max-width: 768px) {
+            #login-container, #register-container {
+                width: 95%;
+                margin-block: 60px; /* Ajuste a margem em telas menores */
+            }
+            button {
+                width: 90%; /* Ajuste a largura dos botões em mobile */
+            }
+            .donate-button {
+                width: 90%; /* Ajuste a largura do botão de doação em mobile */
+            }
+
             #main-chat-layout {
                 flex-direction: column; /* Empilha as colunas verticalmente */
                 width: 95%;
@@ -320,6 +502,10 @@
         <button onclick="showRegister()">Cadastrar</button>
         <p id="login-error"></p>
         <p><a href="/proposito.html" class="proposito-link">Nosso Propósito</a></p>
+
+        <button class="donate-button" onclick="openDonationModal()">
+            <i class="fa-solid fa-hand-holding-heart"></i> Faça uma Doação!
+        </button>
     </div>
 
     <div id="register-container" style="display: none;">
@@ -329,6 +515,10 @@
         <button onclick="register()">Cadastrar</button>
         <button onclick="showLogin()">Voltar para Login</button>
         <p id="register-error"></p>
+
+        <button class="donate-button" onclick="openDonationModal()">
+            <i class="fa-solid fa-hand-holding-heart"></i> Faça uma Doação!
+        </button>
     </div>
 
     <div id="main-chat-layout" style="display: none;">
@@ -360,7 +550,90 @@
         </div>
     </div>
 
+    <div id="donationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeDonationModal()">×</span>
+            <h2>Escolha sua Criptomoeda para Doar</h2>
+            <p>Clique em uma opção para copiar o endereço ou pagar via Trust Wallet.</p>
+
+            <div class="crypto-buttons">
+                <div class="crypto-btn btc" onclick="copyAddress('btcAddress')">
+                    <i class="fab fa-btc"></i>
+                    <span class="name">Bitcoin (BTC)</span>
+                    <span class="address" id="btcAddress">bc1qc9xgpjldv884gtrs5dfk7fuk0jam4zufv383uu</span>
+                    <a href="https://link.trustwallet.com/send?address=bc1qc9xgpjldv884gtrs5dfk7fuk0jam4zufv383uu&asset=c0" class="wallet-link" target="_blank" onclick="event.stopPropagation()">Pagar via Trust Wallet</a>
+                </div>
+
+                <div class="crypto-btn bnb" onclick="copyAddress('bnbAddress')">
+                    <i class="fa-solid fa-coins"></i> <span class="name">BNB (BEP20)</span>
+                    <span class="address" id="bnbAddress">0x7A3B40685B9BdBf867CACec5CA349eb5aA854B5B</span>
+                    <a href="https://link.trustwallet.com/send?asset=c20000714&address=0x7A3B40685B9BdBf867CACec5CA349eb5aA854B5B" class="wallet-link" target="_blank" onclick="event.stopPropagation()">Pagar via Trust Wallet</a>
+                </div>
+
+                <div class="crypto-btn usdt" onclick="copyAddress('usdtAddress')">
+                    <i class="fa-solid fa-dollar-sign"></i> <span class="name">USDT (ERC20)</span>
+                    <span class="address" id="usdtAddress">0x7A3B40685B9BdBf867CACec5CA349eb5aA854B5B</span>
+                    <a href="https://link.trustwallet.com/send?asset=c60_t0xdAC17F958D2ee523a2206206994597C13D831ec7&address=0x7A3B40685B9BdBf867CACec5CA349eb5aA854B5B" class="wallet-link" target="_blank" onclick="event.stopPropagation()">Pagar via Trust Wallet</a>
+                </div>
+
+                <div class="crypto-btn eth" onclick="copyAddress('ethAddress')">
+                    <i class="fab fa-ethereum"></i>
+                    <span class="name">Ethereum (ETH)</span>
+                    <span class="address" id="ethAddress">0x7A3B40685B9BdBf867CACec5CA349eb5aA854B5B</span>
+                    <a href="https://link.trustwallet.com/send?address=0x7A3B40685B9BdBf867CACec5CA349eb5aA854B5B&asset=c60" class="wallet-link" target="_blank" onclick="event.stopPropagation()">Pagar via Trust Wallet</a>
+                </div>
+
+                <div class="crypto-btn chz" onclick="copyAddress('chzAddress')">
+                    <i class="fa-solid fa-futbol"></i> <span class="name">Chiliz (CHZ)</span>
+                    <span class="address" id="chzAddress">bnb1svr9vgc29txaqsf30ref7dd3v34duddrgqg2vc</span>
+                    <a href="https://link.trustwallet.com/send?address=bnb1svr9vgc29txaqsf30ref7dd3v34duddrgqg2vc&asset=c714_tCHZ-ECD" class="wallet-link" target="_blank" onclick="event.stopPropagation()">Pagar via Trust Wallet</a>
+                </div>
+            </div>
+
+            <p style="font-size: 0.9em; color: #777;">* Clique no endereço para copiar. O link da Trust Wallet abrirá o aplicativo (se instalado) ou o navegador.</p>
+        </div>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Função para abrir o modal
+        function openDonationModal() {
+            document.getElementById('donationModal').style.display = 'flex'; // Usar flex para centralizar
+        }
+
+        // Função para fechar o modal
+        function closeDonationModal() {
+            document.getElementById('donationModal').style.display = 'none';
+        }
+
+        // Fechar o modal ao clicar fora do conteúdo do modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('donationModal');
+            if (event.target == modal) {
+                closeDonationModal();
+            }
+        }
+
+        // Função para copiar o endereço para a área de transferência
+        function copyAddress(elementId) {
+            const addressElement = document.getElementById(elementId);
+            const address = addressElement.innerText;
+
+            navigator.clipboard.writeText(address).then(() => {
+                // Mensagem de feedback visual
+                const originalText = addressElement.innerText;
+                addressElement.innerText = 'Copiado!';
+                setTimeout(() => {
+                    addressElement.innerText = originalText;
+                }, 1500); // Volta ao texto original após 1.5 segundos
+
+                alert('Endereço copiado para a área de transferência: ' + address);
+            }).catch(err => {
+                console.error('Falha ao copiar o texto: ', err);
+                alert('Erro ao copiar o endereço. Por favor, copie manualmente: ' + address);
+            });
+        }
+    </script>
 </body>
 </html>
